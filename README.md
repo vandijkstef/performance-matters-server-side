@@ -30,3 +30,4 @@ TODO: GIVE EXPLANATION OF DATA STORAGE
 	- Images
 	- CSS
 	- Client-side JS
+[ ]  Move git token to env variable and document in readme
