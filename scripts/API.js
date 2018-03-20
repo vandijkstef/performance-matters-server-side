@@ -24,6 +24,7 @@ class API {
 		// 	}
 		// };
 		// API.send();
+		url = url.replace(this.server, ''); // Git gives full urls, so strip the server from the url
 		request({
 			url: this.server + url,
 			headers: {
@@ -31,7 +32,7 @@ class API {
 			}
 		}, function (error, response, body) {
 			try {
-				var data = JSON.parse(body);
+				const data = JSON.parse(body);
 				callback(data);
 			} catch(err) {
 				callback({message: 'Could not parse received data'});
