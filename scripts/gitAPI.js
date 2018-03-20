@@ -6,11 +6,21 @@ class GitAPI extends API {
 		super('https://api.github.com');
 		this.auth = '?access_token=' + settings.tokens.git;
 	}
-
 	
 	GetReposFromOrg(organisation, callback) {
 		this.callCallback('/orgs/' + organisation + '/repos' + this.auth, (data) => {
-			console.log('one');
+			callback(data);
+		});
+	}
+
+	GetAllForks(forks_url, callback) {
+		this.callCallback(forks_url, (data) => {
+			callback(data);
+		});
+	}
+
+	CountAllCommits(contributors_url, callback) {
+		this.callCallback(contributors_url, (data) => {
 			callback(data);
 		});
 	}
