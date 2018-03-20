@@ -1,0 +1,15 @@
+<% include head.ejs %>
+
+<h1>Movies</h1>
+<% for(var i = 0; i < movies.length; i++) {%>
+<a href="/movies/<%= movies[i].id%>">
+  <article>
+    <header>
+      <h1><%= movies[i].title %></h1>
+    </header>
+
+    <p><%= movies[i].plot %></p>
+
+  </article>
+</a>
+<% } %>
