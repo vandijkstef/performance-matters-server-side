@@ -4,8 +4,13 @@
 	<section id="repo">
 		<div>
 			<h1><%- locals.data.name %></h1>
+			<% if (locals.data.forks) { %>
+				<ol>
+				<% for(var i=0; i < locals.data.forks.length; i++) { %>
+					<li><a href="<%- locals.data.forks[i].github %>"><%- locals.data.forks[i].owner.name %></a></li>
+				<% } %>
+				</ol>
+			<% } %>
 		</div>
 	</section>
 </main>
-
-<% include foot.ejs %>

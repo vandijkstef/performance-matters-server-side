@@ -19,13 +19,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/repos', function (req, res) {
-	// TODO: Test if data is old enough to refresh]
-	storage.load('repo-list', (err, data) => {
+	storage.load('repos-list', (err, data) => {
 		if (err || Date.now() - data.stored > 21600000) { // 6 hours
 			console.log('new data');
-			const gitapi = new gitAPI('https://api.github.com');
+			const gitapi = new gitAPI();
 			gitapi.GetReposFromOrg(settings.organisation, (data) => {
-				// console.log(data);
 				const repos = [];
 				data.forEach((repo) => {
 					const newRepo = {
@@ -38,7 +36,7 @@ app.get('/repos', function (req, res) {
 					repos.push(newRepo);
 				});
 				storage.add({
-					id: 'repo-list',
+					id: 'repos-list',
 					stored: Date.now(),
 					repos: repos
 				}, function(err) {
@@ -58,25 +56,36 @@ app.get('/repos', function (req, res) {
 		} else {
 			console.log('got data');
 			res.render('repos.ejs', {repos: data.repos});
-
 		}
 	});
-	
 });
 
 app.get('/repos/:id', function (req, res) {
 	storage.load('repo-' + req.params.id, (err, obj) => {
 		let data = {};
-		Object.assign(data, obj.data);
-		if (err || Date.now() - data.stored > 21600000) { // 6 hours
+		if (err) {
 			data.name = req.params.id;
 			data.noData = true;
 			res.render('repo.ejs', {data: data});
 		} else {
+			Object.assign(data, obj.data);
 			if (!data.expanded || Date.now() - data.stored > 21600000) { // 6 hours
-				// TODO: Expand data
-				res.render('repo.ejs', {data: data});
+				const gitapi = new gitAPI();
+				gitapi.GetAllForks(data.urls.forks, (forkData) => {
+					data.forks = forkData;
+					data.expanded = true;
+					storage.add({
+						id: 'repo-' + data.name,
+						stored: Date.now(),
+						data: data
+					}, ()=> {
+						if (err) throw err;
+						// TODO: Count all commits
+						res.render('repo.ejs', {data: data});
+					});
+				});
 			} else {
+				console.log('no data update');
 				res.render('repo.ejs', {data: data});
 			}
 		}
