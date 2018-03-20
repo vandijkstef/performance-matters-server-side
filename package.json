@@ -1,7 +1,7 @@
 {
-  "name": "adamnet-trainstations",
+  "name": "github-org-explorer",
   "version": "1.0.0",
-  "description": "adamnet server side",
+  "description": "wafs server side",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +14,7 @@
     "ejs": "^2.5.7",
     "express": "^4.15.2",
     "http": "0.0.0",
+    "json-fs-store": "^1.0.1",
     "request": "^2.81.0"
   }
 }
