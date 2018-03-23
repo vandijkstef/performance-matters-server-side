@@ -6,7 +6,7 @@ Clone the repo. Run the following command to initialize all modules
 ```
 npm install
 ```
-Additionally, make sure you have the following packages:
+Additionally, to build, make sure you have the following packages:
 * Browserify (npm install -g browserify)
 
 Build the app by using
@@ -32,3 +32,15 @@ Additionally, every repo has it's own file, which will have its data expanded up
 
 ## Client side enhancement
 If JS is available, a client side API call will fetch the total amount of commits. This JS is compiled using Browserify.
+
+## Performance
+Performance tests assume data is cached on the server, using chromes Fast 3G option.
+### Initial
+* First request: 12.9s | 2.1MB
+* Cached request: 1.42s | 643B
+### GZIP
+* First request: 4.04s | 497KB (saved 8.86 | 1603KB)
+* Cached request: 1.42s | 643B
+## CSS Minification
+* First request: 4.04s | 497KB (saved 0 | 0)
+* Cached request: 1.42s | 643B
