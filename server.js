@@ -7,8 +7,8 @@ const storage = require('json-fs-store')('./cache');
 const compression = require('compression');
 // var host = 'http://dennistel.nl/movies/'
 
-app.use(express.static('public'));
 app.use(compression());
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
