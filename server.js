@@ -21,11 +21,13 @@ app.get('/repos', function (req, res) {
 			gitapi.GetReposFromOrg(settings.organisation, (data) => {
 				const repos = [];
 				data.forEach((repo) => {
+					console.log(repo);
 					const newRepo = {
 						name: repo.name,
 						urls:  {
 							forks: repo.forks_url,
-							github: repo.html_url
+							github: repo.html_url,
+							contributors: repo.contributors_url
 						}
 					};
 					repos.push(newRepo);
@@ -83,6 +85,24 @@ app.get('/repos/:id', function (req, res) {
 				res.render('repo.ejs', {data: data});
 			}
 		}
+	});
+});
+
+app.get('/api/count/:id', function(req, res) {
+	storage.load('repo-' + req.params.id, (err, obj) => {
+		const json = {};
+		if (err) {
+			json.message = 'Error fetching data';
+			json.count = 0;
+		} else if (!obj.data.commitCount || Date.now() - obj.data.stored > 21600000) {
+			const gitapi = new gitAPI();
+			console.log(obj);
+			gitapi.CountAllCommits(obj.data.urls.contributors, (data) => {
+				console.log(data);
+				res.send(json);
+			});
+
+		} // 6 hours
 	});
 });
 
