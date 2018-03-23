@@ -23,7 +23,6 @@ app.get('/repos', function (req, res) {
 			gitapi.GetReposFromOrg(settings.organisation, (data) => {
 				const repos = [];
 				data.forEach((repo) => {
-					console.log(repo);
 					const newRepo = {
 						name: repo.name,
 						urls:  {
@@ -98,9 +97,8 @@ app.get('/api/count/:id', function(req, res) {
 			json.count = 0;
 		} else if (!obj.data.commitCount || Date.now() - obj.data.stored > 21600000) {
 			const gitapi = new gitAPI();
-			console.log(obj);
-			gitapi.CountAllCommits(obj.data.urls.contributors, (data) => {
-				console.log(data);
+			gitapi.CountAllCommits(obj, (data) => {
+				json.count = data;
 				res.send(json);
 			});
 
