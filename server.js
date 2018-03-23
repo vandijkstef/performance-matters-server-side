@@ -11,17 +11,12 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.get('/', function (req, res) {
-//   request(host, function (error, response, body) {
-//     var data = JSON.parse(body)
-//     res.render('index.ejs',)
-//   });
 	res.render('index.ejs');
 });
 
 app.get('/repos', function (req, res) {
 	storage.load('repos-list', (err, data) => {
 		if (err || Date.now() - data.stored > 21600000) { // 6 hours
-			console.log('new data');
 			const gitapi = new gitAPI();
 			gitapi.GetReposFromOrg(settings.organisation, (data) => {
 				const repos = [];
@@ -54,7 +49,6 @@ app.get('/repos', function (req, res) {
 				});
 			});
 		} else {
-			console.log('got data');
 			res.render('repos.ejs', {repos: data.repos});
 		}
 	});
