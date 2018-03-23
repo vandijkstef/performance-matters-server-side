@@ -41,6 +41,6 @@ Performance tests assume data is cached on the server, using chromes Fast 3G opt
 ### GZIP
 * First request: 4.04s | 497KB (saved 8.86 | 1603KB)
 * Cached request: 1.42s | 643B
-## CSS Minification
+### CSS Minification
 * First request: 4.04s | 497KB (saved 0 | 0)
 * Cached request: 1.42s | 643B
