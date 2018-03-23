@@ -26,7 +26,7 @@ class API {
 		// API.send();
 		url = url.replace(this.server, ''); // Git gives full urls, so strip the server from the url
 		request({
-			url: this.server + url,
+			url: this.server + url + this.auth,
 			headers: {
 				'User-Agent': 'NODEJS'
 			}
