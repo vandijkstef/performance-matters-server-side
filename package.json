@@ -4,8 +4,11 @@
   "description": "wafs server side",
   "main": "server.js",
   "scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1",
-	"build:js": "browserify src/js/client.src.js -o public/js/client.js"
+	"watch": "nodemon server.js -i cache/",
+	"build:js": "browserify src/js/client.src.js -o public/js/client.js",
+	"build": "npm run build:js",
+	"build:run": "npm run build && node server.js",
+	"build:watch": "npm run build && npm run watch"
   },
   "author": "Stef van Dijk",
   "license": "ISC",
