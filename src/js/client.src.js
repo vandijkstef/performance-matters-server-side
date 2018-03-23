@@ -5,7 +5,7 @@ const api = new API('http://localhost:1337');
 
 window.addEventListener('DOMContentLoaded', () => {
 	const repo = document.querySelector('#repo');
-	if (repo !== undefined) {
+	if (repo) {
 		const repoName = repo.querySelector('h1').innerText;
 		getCount(repoName, (data) => {
 			console.log(data);
