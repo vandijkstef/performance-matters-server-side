@@ -4,16 +4,17 @@
   "description": "wafs server side",
   "main": "server.js",
   "scripts": {
-	"watch": "nodemon server.js -i cache/",
-	"build:js": "browserify src/js/client.src.js -o public/js/client.js",
-	"build": "npm run build:js",
-	"build:run": "npm run build && node server.js",
-	"build:watch": "npm run build && npm run watch"
+    "watch": "nodemon server.js -i cache/",
+    "build:js": "browserify src/js/client.src.js -o public/js/client.js",
+    "build": "npm run build:js",
+    "build:run": "npm run build && node server.js",
+    "build:watch": "npm run build && npm run watch"
   },
   "author": "Stef van Dijk",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.15.2",

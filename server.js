@@ -4,9 +4,11 @@ var gitAPI = require('./scripts/gitAPI.js');
 var app = express();
 const settings = require('./scripts/settings.js');
 const storage = require('json-fs-store')('./cache');
+const compression = require('compression');
 // var host = 'http://dennistel.nl/movies/'
 
 app.use(express.static('public'));
+app.use(compression());
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
