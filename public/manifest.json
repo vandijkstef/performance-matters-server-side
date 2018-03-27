@@ -1,6 +1,6 @@
 {
 	"name": "CMDA Github Organisation Explorer",
-	"short_name": "GitHub Explorer",
+	"short_name": "GitHub Exp",
 	"description": "Discover irrelevant information about a Github organisation",
 	"dir": "auto",
 	"lang": "en-US",
