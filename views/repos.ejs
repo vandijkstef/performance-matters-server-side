@@ -5,7 +5,7 @@
 		<h1>Repos</h1>
 		<% if (locals.repos) { %>
 			<% for(var i=0; i < locals.repos.length; i++) { %>
-				<div>
+				<div id="<%- locals.repos[i].name %>">
 					<a href="/repos/<%- locals.repos[i].name %>"><%- locals.repos[i].name %></a>
 				</div>
 			<% } %>
