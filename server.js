@@ -28,7 +28,6 @@ app.get('/repos', function (req, res) {
 						urls:  {
 							forks: repo.forks_url,
 							github: repo.html_url,
-							contributors: repo.contributors_url
 						}
 					};
 					repos.push(newRepo);
@@ -77,13 +76,12 @@ app.get('/repos/:id', function (req, res) {
 						data: data
 					}, ()=> {
 						if (err) throw err;
-						// TODO: Count all commits
 						res.render('repo.ejs', {data: data});
 					});
 				});
 			} else {
 				console.log('no data update');
-				res.render('repo.ejs', {data: data});
+				return res.render('repo.ejs', {data: data});
 			}
 		}
 	});
@@ -94,15 +92,25 @@ app.get('/api/count/:id', function(req, res) {
 		const json = {};
 		if (err) {
 			json.message = 'Error fetching data';
-			json.count = 0;
 		} else if (!obj.data.commitCount || Date.now() - obj.data.stored > 21600000) {
 			const gitapi = new gitAPI();
 			gitapi.CountAllCommits(obj, (data) => {
-				json.count = data;
-				res.send(json);
+				const count = data || -1; 
+				json.count = count;
+				obj.data.commitCount = count;
+				storage.add({
+					id: obj.id,
+					stored: Date.now(),
+					data: obj.data
+				}, ()=> {
+					if (err) throw err;
+					res.send(json);
+				});
 			});
-
-		} // 6 hours
+		} else {
+			json.count = obj.data.commitCount;
+			res.send(json);
+		}
 	});
 });
 
