@@ -62,7 +62,7 @@ Performance tests assume data is cached on the server, using chromes Fast 3G opt
 * Cached request: 1.42s | 643B
 
 ## Lighthouse Audit
-* Performance: 82 (FMP: 3.060ms, FI: 4.110ms, CI: 4.110ms, PSI: 79 (3.091), EIL: 100 (16ms))
+* Performance: 95 (FMP: 1.180ms, FI: 3.050ms, CI: 3.050ms, PSI: 96 (1.212), EIL: 100 (16ms))
 	* Due to render blocking CSS
 * PWA: 91
 	* Due to non-HTTPS
