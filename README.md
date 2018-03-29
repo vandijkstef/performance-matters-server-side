@@ -1,4 +1,4 @@
-![Logo of the project](https://raw.githubusercontent.com/vandijkstef/performance-matters-server-side/master/public/icon/github-icon.png)
+![Logo of the project](public/icons/github-icon.png?raw=true)
 
 # Github Organisation Explorer
 > This is a server-side version of the [client-side Github organisation explorer](https://github.com/vandijkstef/wafs).
@@ -62,7 +62,8 @@ Performance tests assume data is cached on the server, using chromes Fast 3G opt
 * Cached request: 1.42s | 643B
 
 ## Lighthouse Audit
-* Performance: 82 (FMP: 3.060ms, FI: 4.110ms, CI: 4.110ms, PSI: 79 (3.091), EIL: 100 (16ms))
+![performance audit](docimg/cmda_gh-pa.png?raw=true)
+* Performance: 95
 	* Due to render blocking CSS
 * PWA: 91
 	* Due to non-HTTPS
