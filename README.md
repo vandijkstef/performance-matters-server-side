@@ -50,18 +50,27 @@ The Service Worker will enable the app to immediatly cache the static assets and
 All settings reside in /scripts/settings.js such as the organisation and GitHub API key.
 
 ## Performance
-Performance tests assume data is cached on the server, using chromes Fast 3G option.
 ### Initial
-* First request: 12.9s | 2.1MB
-* Cached request: 1.42s | 643B
-### GZIP
-* First request: 4.04s | 497KB (saved 8.86 | 1603KB)
-* Cached request: 1.42s | 643B
-### CSS Minification
-* First request: 4.04s | 497KB (saved 0 | 0)
-* Cached request: 1.42s | 643B
+![stage-0](docimg/state-0.png?raw=true)
+### Gzipping
+![stage-1](docimg/state-1.png?raw=true)
+Saved compared to last set:
+* 13.010 - 4.200 = 8.810 ms
+### CSS minify
+![stage-2](docimg/state-2.png?raw=true)
+Saved compared to last set:
+* 4.200 - 4.210 = -0.010 ms
+### Service worker
+![stage-3](docimg/state-3.png?raw=true)
+Saved compared to last set:
+* 4.210 - 1.200 = 3.010 ms
+### Minify JS
+![stage-4](docimg/state-4.png?raw=true)
+Saved compared to last set:
+* 1.200 - 1.180 = 0.020 ms
 
-## Lighthouse Audit
+## Final Audit
+This is the same as the above minify JS state.
 ![performance audit](docimg/cmda_gh-pa.png?raw=true)
 * Performance: 95
 	* Due to render blocking CSS
