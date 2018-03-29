@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "watch": "nodemon server.js -i cache/",
-	"build:js": "npm run js:compile && npm run js:uglify",
-	"js:compile": "browserify src/js/client.src.js -t [babelify --presets [es2015] -o public/js/client.js ",
-	"js:uglify": "uglifyjs public/js/client.js -c --output public/js/client.min.js",
+    "build:js": "npm run js:compile && npm run js:uglify",
+    "js:compile": "browserify src/js/client.src.js -t [babelify --presets [es2015] -o public/js/client.js ",
+    "js:uglify": "uglifyjs public/js/client.js -c --output public/js/client.min.js",
     "build": "npm run build:js",
     "build:run": "npm run build && node server.js",
     "build:watch": "npm run build && npm run watch"
