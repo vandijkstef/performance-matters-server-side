@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "watch": "nodemon server.js -i cache/",
-    "build:js": "browserify src/js/client.src.js -o public/js/client.js",
+	"build:js": "npm run js:compile && npm run js:uglify",
+	"js:compile": "browserify src/js/client.src.js -t [babelify --presets [es2015] -o public/js/client.js ",
+	"js:uglify": "uglifyjs public/js/client.js -c --output public/js/client.min.js",
     "build": "npm run build:js",
     "build:run": "npm run build && node server.js",
     "build:watch": "npm run build && npm run watch"
@@ -21,5 +23,11 @@
     "http": "0.0.0",
     "json-fs-store": "^1.0.1",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "uglifyify": "^4.0.5"
   }
 }
